@@ -1,0 +1,19 @@
+services:  
+  nfsserver:
+    build: nfsserver
+    container_name: nfsserver
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - video:/data/resources
+  nfsclient:
+    build: nfsclient
+    container_name: nfsclient
+    restart: unless-stopped
+    privileged: true
+    env_file:
+      - client.env
+    depends_on:
+      - nfsserver
+volumes:
+  video:

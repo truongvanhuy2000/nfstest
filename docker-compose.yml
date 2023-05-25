@@ -4,16 +4,28 @@ services:
     container_name: nfsserver
     restart: unless-stopped
     privileged: true
+    environment:
+      - SHARED_DIRECTORY=/data/resources
     volumes:
       - video:/data/resources
+    ports:
+      - 2049:2049
+    networks:
+      - vanhuy
+    
   nfsclient:
     build: nfsclient
     container_name: nfsclient
-    restart: unless-stopped
     privileged: true
     env_file:
       - client.env
     depends_on:
       - nfsserver
+    networks:
+      - vanhuy
 volumes:
   video:
+networks:
+  vanhuy:
+    ipam:
+      driver: default

@@ -1,9 +1,5 @@
-FROM ubuntu:latest as build_stage
+FROM itsthenetwork/nfs-server-alpine:latest as build_stage
 WORKDIR /data
 COPY . .
 
-RUN apt update \
-    && apt install -y nfs-kernel-server \
-    && chmod +x entrypoint.sh
-
-CMD ["/data/entrypoint.sh"]
+CMD ["bash"]

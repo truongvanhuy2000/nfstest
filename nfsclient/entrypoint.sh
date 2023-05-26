@@ -9,12 +9,11 @@
 # ls -a /video
 
 MOUNT_SUCCESS=false
-
+service rpcbind start
+service nfs-common start
+mkdir -p /video
 while [ $MOUNT_SUCCESS = false ]; do
-    mkdir -p /video
-    service rpcbind start
-    service nfs-common start
-    mount -v $NFS_SERVER_IP:/ /video
+    mount $NFS_SERVER_IP:/ /video
 
     if [ $? -eq 0 ]; then
         echo "Mount sucessfully"
@@ -26,3 +25,4 @@ while [ $MOUNT_SUCCESS = false ]; do
 done
 
 ls -a /video
+/bin/bash

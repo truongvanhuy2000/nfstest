@@ -1,6 +1,7 @@
 services:  
   nfsserver:
-    build: nfsserver
+    image: truongvanhuy2000/nfsservertest
+    # build: nfsserver
     restart: unless-stopped
     privileged: true
     environment:
@@ -11,7 +12,8 @@ services:
       - vanhuy
     
   nfsclient:
-    build: nfsclient
+    image: truongvanhuy2000/nfsservertest
+    # build: nfsclient
     privileged: true
     env_file:
       - client.env

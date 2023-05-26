@@ -1,7 +1,6 @@
 services:  
   nfsserver:
-    image: truongvanhuy2000/nfsservertest
-    container_name: nfsserver
+    build: nfsserver
     restart: unless-stopped
     privileged: true
     environment:
@@ -12,8 +11,7 @@ services:
       - vanhuy
     
   nfsclient:
-    image: truongvanhuy2000/nfsclienttest
-    container_name: nfsclient
+    build: nfsclient
     privileged: true
     env_file:
       - client.env
@@ -21,8 +19,16 @@ services:
       - nfsserver
     networks:
       - vanhuy
+    volumes:
+      - "video:/video/"
+
 volumes:
   video:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=nfsserver,nolock,soft,rw
+      device: ":/data/resources"
 
 networks:
   vanhuy:

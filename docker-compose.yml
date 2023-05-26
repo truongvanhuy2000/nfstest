@@ -8,8 +8,6 @@ services:
       - SHARED_DIRECTORY=/data/resources
     volumes:
       - video:/data/resources
-    ports:
-      - 2049:2049
     networks:
       - vanhuy
     
@@ -25,6 +23,7 @@ services:
       - vanhuy
 volumes:
   video:
+
 networks:
   vanhuy:
     ipam:

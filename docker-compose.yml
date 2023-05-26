@@ -12,7 +12,7 @@ services:
       - vanhuy
     
   nfsclient:
-    image: truongvanhuy2000/nfsservertest
+    image: truongvanhuy2000/nfsclienttest
     # build: nfsclient
     privileged: true
     env_file:
